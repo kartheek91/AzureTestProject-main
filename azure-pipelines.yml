@@ -7,7 +7,7 @@ variables:
   buildConfiguration: Release
   solution: '**/RoundTheCode.AzureTestProject.sln'
   project: '**/RoundTheCode.AzureTestProject.csproj'
-steps:
+  steps:
   - task: NuGetToolInstaller@1
     name: NuGetToolInstaller
     displayName: NuGet tool installer
