@@ -49,12 +49,11 @@ steps:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
-  - task: CopyPublishBuildArtifacts@1
+  - task: CopyFiles@2
     inputs:
-      CopyRoot: '**/'
+      SourceFolder: '$(Build.SourcesDirectory)'
       Contents: 'dockerfile'
-      ArtifactName: 'drop'
-      ArtifactType: 'FilePath'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
   
   - task: DownloadPipelineArtifact@2
     inputs:
