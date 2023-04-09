@@ -64,7 +64,7 @@ steps:
     inputs:
       containerRegistry: 'Docker-Service-Connection'
       command: 'build'
-      Dockerfile: '$(Build.ArtifactStagingDirectory)/drop/dockerfile'
+      Dockerfile: '$(Build.ArtifactStagingDirectory)/dockerfile'
       tags: 'my-image:$(Build.BuildId)'
   - task: Docker@2
     inputs:
