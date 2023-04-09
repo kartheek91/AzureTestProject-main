@@ -53,7 +53,7 @@ steps:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)'
       Contents: 'dockerfile'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/RoundTheCode.AzureTestProject'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
   
   - task: DownloadPipelineArtifact@2
     inputs:
