@@ -53,6 +53,8 @@ steps:
     displayName: Login to ACR
     inputs:
       command: login
-      containerRegistry: Testartifacts
+      containerRegistry: Docker-Service-Connection
+
+
 
   
