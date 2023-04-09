@@ -1,9 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
 WORKDIR /app
 
-# Authenticate to Azure Artifacts with a PAT
-ARG PAT
-RUN echo "machine dev.azure.com login azure-access-token password $PAT" > ~/.netrc
 
 COPY *.csproj ./
 RUN dotnet restore
