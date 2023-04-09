@@ -54,7 +54,14 @@ steps:
     inputs:
       command: login
       containerRegistry: Docker-Service-Connection
-
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker-Service-Connection'
+      repository: 'test-image'
+      command: 'build'
+      Dockerfile: '**/Dockerfile'
+      buildContext: '$(System.DefaultWorkingDirectory)'
+      arguments: '--build-arg PAT=$(System.AccessToken)'
 
 
   
