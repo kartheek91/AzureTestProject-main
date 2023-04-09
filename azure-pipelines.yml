@@ -77,4 +77,4 @@ steps:
     inputs:
       containerRegistry: 'Docker-Service-Connection'
       command: 'push'
-      imageName: 'my-image:$(Build.BuildId)'
+      imageName: 'my-first-image:latest'
