@@ -53,7 +53,7 @@ steps:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)'
       Contents: 'dockerfile'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop'
+      TargetFolder: '$(Build.ArtifactStagingDirectory)/drop/RoundTheCode.AzureTestProject'
   
   - task: DownloadPipelineArtifact@2
     inputs:
@@ -70,7 +70,7 @@ steps:
     inputs:
       containerRegistry: 'Docker-Service-Connection'
       command: 'build'
-      Dockerfile: '$(Build.ArtifactStagingDirectory)/dockerfile'
+      Dockerfile: '$(Build.ArtifactStagingDirectory)/RoundTheCode.AzureTestProject/dockerfile'
       tags: 'my-image:$(Build.BuildId)'
   - task: Docker@2
     inputs:
