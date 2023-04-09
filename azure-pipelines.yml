@@ -78,5 +78,5 @@ steps:
     inputs:
       containerRegistry: 'Docker-Service-Connection'
       command: 'push'
-      imageName: 'my-first-image:latest'
       repository: 'Testartifacts'
+      tags: 'latest'
