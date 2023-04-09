@@ -1,5 +1,4 @@
-FROM ubuntu:latest
-
+FROM mcr.microsoft.com/windows/nanoserver:1803-amd6
 # Install unzip
 RUN apt-get update && \
     apt-get install -y unzip
@@ -8,4 +7,4 @@ WORKDIR /app
 COPY drop.zip /app/
 
 # Unzip the file
-RUN unzip rop.zip -d /app/
+RUN unzip drop.zip -d /app/
