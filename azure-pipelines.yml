@@ -90,7 +90,7 @@ steps:
       containerRegistry: 'Docker-Service-Connection'
       repository: 'Testartifacts'
       command: 'run'
-      arguments: '-dt -p 8080:80 --name myapp -v $(pwd)/data:/app/data  testartifacts.azurecr.io/testartifacts:latest'
+      arguments: '-dt -p 8080:80 --name myapp   testartifacts.azurecr.io/testartifacts:latest'
       tags: 'latest'
   - task: Bash@3
     inputs:
