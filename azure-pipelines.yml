@@ -80,3 +80,22 @@ steps:
       command: 'push'
       repository: 'Testartifacts'
       tags: 'latest'
+  - task: Docker@2
+    inputs:
+      containerRegistry: 'Docker-Service-Connection'
+      command: 'run'
+      imageName: ' testartifacts.azurecr.io/testartifacts:latest'
+      ports: |
+        8080:80
+      containerCommand: 'myfirstapp --port 80'
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        response=$(curl http://localhost:8080/api/my)
+        if [[ "$response" == "true" ]]; then
+          echo "Container test passed" + $response
+        else
+          echo "Container test failed"
+          exit 1
+        fi
