@@ -72,9 +72,11 @@ steps:
       containerRegistry: 'Docker-Service-Connection'
       command: 'build'
       Dockerfile: '$(Build.ArtifactStagingDirectory)/RoundTheCode.AzureTestProject/dockerfile'
-      tags: 'my-image:$(Build.BuildId)'
+      tags: 'latest'
+      repository: 'Testartifacts'
   - task: Docker@2
     inputs:
       containerRegistry: 'Docker-Service-Connection'
       command: 'push'
       imageName: 'my-first-image:latest'
+      repository: 'Testartifacts'
