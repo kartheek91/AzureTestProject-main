@@ -59,7 +59,7 @@ steps:
     inputs:
       command: build
       containerRegistry: Docker-Service-Connection
-      Dockerfile: '**/DockerFile'
+      Dockerfile: '**/dockerfile'
       tags: 'latest'
       repository: AzureTestProject-main
   - task: Docker@2
