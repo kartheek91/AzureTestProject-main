@@ -59,6 +59,7 @@ steps:
     inputs:
       command: buildAndPush
       containerRegistry: Docker-Service-Connection
+      Dockerfile: "**"
       repository: AzureTestProject-main
       tags: |
         latest
