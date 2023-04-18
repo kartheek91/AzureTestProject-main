@@ -1,15 +1,15 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - main
 
+pool:
+  vmImage: 'ubuntu-latest'
+
 steps:
 - task: AzureCLI@2
+  displayName: 'Azure CLI Login'
   inputs:
-    azureSubscription: 'Microsoft Partner Network(2)(0886e8f9-5795-44b0-be0f-1b4d34545da6)'
-    scriptType: 'batch'
+    azureSubscription: '0886e8f9-5795-44b0-be0f-1b4d34545da6'
+    scriptType: 'bash'
     scriptLocation: 'inlineScript'
-    inlineScript: 'az login'
+    inlineScript: |
+      az login 
