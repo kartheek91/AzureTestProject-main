@@ -17,3 +17,12 @@ steps:
    
       Start-Process msiexec.exe -Wait -ArgumentList "/I powershell-7.1.3-win-x64.msi /quiet /norestart"
       echo Installation Completed SUccessfully!
+      
+- task: AzureCLI@2
+  inputs:
+    azureSubscription: 'MyAzureSubscription'
+    scriptType: 'pscore'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az login --service-principal -u $(servicePrincipalId) -p $(servicePrincipalKey) --tenant $(tenantId)
+
