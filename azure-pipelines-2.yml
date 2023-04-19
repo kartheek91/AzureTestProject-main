@@ -9,25 +9,11 @@ variables:
   - name: azureUsername
     value: "kartheek@sailsoftware.com"
 steps:
-- task: PowerShell@2
-  displayName: Install Powershell
-  inputs:
-    targetType: 'inline'
-    script: |
-      $url = "https://github.com/PowerShell/PowerShell/releases/download/v7.1.3/powershell-7.1.3-win-x64.msi"
-      $output = "powershell-7.1.3-win-x64.msi"
-   
-      Invoke-WebRequest -Uri $url -OutFile $output
-   
-      Start-Process msiexec.exe -Wait -ArgumentList "/I powershell-7.1.3-win-x64.msi /quiet /norestart"
-      echo Installation Completed SUccessfully!
-
 - task: AzureCLI@2
   inputs:
     azureSubscription: 'AzureLoginServicePrincipal'
-    scriptType: 'pscore'
     scriptLocation: 'inlineScript'
+    scriptType: bash
     inlineScript: |
-      $azurePassword = ConvertTo-SecureString $(azurePassword) -AsPlainText -Force
-      $psCred = New-Object System.Management.Automation.PSCredential($(azureUsername), $azurePassword)
-      az login --username $psCred.UserName --password $psCred.Password
+      az login
+
