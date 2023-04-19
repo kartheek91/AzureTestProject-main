@@ -9,5 +9,6 @@ steps:
   inputs:
     azureSubscription: 'AzureLoginServicePrincipal'
     scriptLocation: 'inlineScript'
+    scriptType: bash
     inlineScript: |
       az login
