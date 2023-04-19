@@ -3,7 +3,6 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
-
 steps:
 - task: AzureCLI@2
   inputs:
@@ -12,3 +11,4 @@ steps:
     scriptType: bash
     inlineScript: |
       az login
+
