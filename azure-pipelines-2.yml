@@ -15,7 +15,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      az login --username kartheek@sailssoftware.com --password $@!l$2812 --tenantid f41c0fb4-85fd-4993-b320-77faf9d8d07f
+      az login --username kartheek@sailssoftware.com --password $@!l$2812 
       az account set --subscription 0886e8f9-5795-44b0-be0f-1b4d34545da6
 
 - task: Bash@3
