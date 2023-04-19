@@ -3,11 +3,6 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-variables:
-  - name: azurePassword
-    value: "$@!l$2812"
-  - name: azureUsername
-    value: "kartheek@sailsoftware.com"
 steps:
 - task: AzureCLI@2
   inputs:
