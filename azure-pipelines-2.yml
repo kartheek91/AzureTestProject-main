@@ -37,3 +37,4 @@ steps:
     script: |
       terraform init 
       terraform plan
+      terraform apply
