@@ -1,12 +1,6 @@
 trigger:
 - none
-variables:
-    - name: servicePrincipalId
-      value: 'deeaa022-1358-42fd-9b35-28f5a72f66d0'
-    - name: servicePrincipalKey
-      value: 'soj8Q~p3-OFiA6pGcpimV6JYo7pTIaeiXjjASagD'
-    - name: tenantId
-      value: 'f41c0fb4-85fd-4993-b320-77faf9d8d07f'
+   
 pool:
   vmImage: 'ubuntu-latest'
 steps:
