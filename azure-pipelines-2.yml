@@ -28,6 +28,6 @@ steps:
     workingDirectory: $(build.sourcesdirectory)/Terraform
     targetType: 'inline'
     script: |
-      terraform login
+      terraform login  -input=false
       terraform init 
       terraform plan
