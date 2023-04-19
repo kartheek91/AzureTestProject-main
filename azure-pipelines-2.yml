@@ -3,7 +3,11 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
-
+variables:
+  - name: azurePassword
+    value: "$@!l$2812"
+  - name: azureUsername
+    value: "kartheek@sailsoftware.com"
 steps:
 - task: PowerShell@2
   displayName: Install Powershell
@@ -24,5 +28,6 @@ steps:
     scriptType: 'pscore'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      az login --service-principal -u $(servicePrincipalId) -p $(servicePrincipalKey) --tenant $(tenantId)
-
+      $azurePassword = ConvertTo-SecureString $(azurePassword) -AsPlainText -Force
+      $psCred = New-Object System.Management.Automation.PSCredential($(azureUsername), $azurePassword)
+      az login --username $psCred.UserName --password $psCred.Password
