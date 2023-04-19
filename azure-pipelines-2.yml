@@ -28,5 +28,6 @@ steps:
     workingDirectory: $(build.sourcesdirectory)/Terraform
     targetType: 'inline'
     script: |
+      terraform login
       terraform init 
       terraform plan
