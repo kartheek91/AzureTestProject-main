@@ -2,12 +2,12 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 steps:
-- task: PowerShell@2
+- task: AzureCLI@2
   inputs:
-    targetType: 'inline'
-    script: |
-      az login --service-principal --username $SP_APP_ID --password $SP_PASSWORD --tenant $SP_TENANT_ID
-      # Run your PowerShell script here
+    azureSubscription: 'AzureLoginServicePrincipal'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      az login
