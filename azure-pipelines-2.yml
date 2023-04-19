@@ -3,7 +3,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 steps:
-- task: AzureCLI@2
+- task: PowerShell@2
   inputs:
     azureSubscription: 'AzureLoginServicePrincipal'
     scriptLocation: 'inlineScript'
