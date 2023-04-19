@@ -16,11 +16,21 @@ steps:
     scriptType: bash
     inlineScript: |
       az login
-- task: PowerShell@2
+- task: Bash@3
+  displayName: 'Install Terraform'
   inputs:
     targetType: 'inline'
     script: |
-      # Write your PowerShell commands here.
-      
-      Write-Host "Hello World"
-
+      wget https://releases.hashicorp.com/terraform/1.4.5/terraform_1.4.5_linux_amd64.zip
+      unzip terraform_1.4.5_linux_amd64.zip
+      sudo mv terraform /usr/local/bin/
+      terraform -version
+      echo kartheek
+      echo terraform -version
+- task: PowerShell@2
+  displayName: 'terraform init'
+  inputs:
+    workingDirectory: $(build.sourcesdirectory)/Terraform
+    targetType: 'inline'
+    script: |
+     terraform init 
