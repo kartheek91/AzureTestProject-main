@@ -9,8 +9,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      az login --username kartheek@sailssoftware.com --password $@!l$2812 
-      az account set --subscription 0886e8f9-5795-44b0-be0f-1b4d34545da6
+      az login --username 'kartheek@sailssoftware.com' --password '$@!l$2812' 
+      az account set --subscription '0886e8f9-5795-44b0-be0f-1b4d34545da6'
 
 - task: Bash@3
   displayName: 'Install Terraform'
