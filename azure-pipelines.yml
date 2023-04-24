@@ -5,6 +5,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: Bash@3
+
 - script: |
     $myObject = @{
       domain = 'src/CSI.Images.Domain/CSI.Images.Domain.csproj'
