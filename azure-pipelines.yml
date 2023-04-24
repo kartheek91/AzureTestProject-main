@@ -1,94 +1,14 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- none
+- main
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
-variables:
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  solution: '**/RoundTheCode.AzureTestProject.sln'
-  project: '**/RoundTheCode.AzureTestProject.csproj'
 steps:
-  - task: NuGetToolInstaller@1
-    name: 'NuGetToolInstaller'
-    displayName: 'NuGet tool installer'
-
-  - task: NuGetCommand@2
-    name: 'NuGetRestore'
-    displayName: 'NuGet restore packages'
-    inputs:
-      command: 'restore'
-      restoreSolution: '$(solution)'
-      feedsToUse: 'select'
-
-  - task: DotNetCoreCLI@2
-    name: 'Tests'
-    displayName: 'Run tests'
-    inputs:
-      command: 'test'
-      projects: '$(solution)'
-      arguments: '--configuration $(BuildConfiguration)'
-
-  - task: DotNetCoreCLI@2
-    name: 'Publish'
-    displayName: 'Publish'
-    inputs:
-      command: 'publish'
-      publishWebProjects: false
-      projects: '$(project)'
-      arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-      zipAfterPublish: false
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-      ArtifactName: 'drop'
-      publishLocation: 'Container'
-
-  
-  - task: DownloadPipelineArtifact@2
-    inputs:
-      artifact: 'drop'
-      path: '$(Build.ArtifactStagingDirectory)'
-      downloadPath: '$(Build.ArtifactStagingDirectory)'
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
-      Contents: 'dockerfile'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)/RoundTheCode.AzureTestProject'
-      
-  - task: Docker@2
-    displayName: Login to ACR
-    inputs:
-      command: login
-      containerRegistry: Docker-Service-Connection
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker-Service-Connection'
-      command: 'build'
-      Dockerfile: '$(Build.ArtifactStagingDirectory)/RoundTheCode.AzureTestProject/dockerfile'
-      tags: 'latest'
-      repository: 'Testartifacts'
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker-Service-Connection'
-      command: 'push'
-      repository: 'Testartifacts'
-      tags: 'latest'
-  - task: DockerInstaller@0
-    displayName: 'Install Docker'
-    inputs:
-        dockerVersion: '17.09.0-ce'
-  
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker-Service-Connection'
-      repository: 'Testartifacts'
-      command: 'run'
-      arguments: '-dt -p 8080:80 --name myapp   testartifacts.azurecr.io/testartifacts:latest'
-      tags: 'latest'
+- script: |
+    $myObject = @{
+      domain = 'src/CSI.Images.Domain/CSI.Images.Domain.csproj'
+      cosmosinfrastructure = 'src/CSI.Images.Infrastructure.Cosmos/CSI.Images.Infrastructure.Cosmos.csproj'
+    }
+    $myArray = $myObject.GetEnumerator() | ForEach-Object { $_.Value }
+    Write-Host "My array is: $myArray"
