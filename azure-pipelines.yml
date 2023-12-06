@@ -35,7 +35,8 @@ jobs:
        
 
         # Log in to Azure
-        az login -u 'kartheek@sailssoftware.com' -p '$@!l$2812'
+        az login --use-device-code
+
 
         # Assign values to parameters
         subscription_id="${{ parameters.subscription_id }}"
