@@ -32,6 +32,7 @@ jobs:
       scriptLocation: inlineScript
       inlineScript: |
         # Perform interactive login using device-code
+        az upgrade
         az login --use-device-code
 
         # Assign values to parameters
