@@ -20,6 +20,8 @@ parameters:
 - name: api_version_set_display_name
   type: string
   default: "echo-api"
+- name: connectedServiceNameARM
+  type: string  # Make sure to adjust the type based on your service connection type
 
 jobs:
 - job: UpdateApiVersionSet
@@ -28,12 +30,10 @@ jobs:
   - task: AzureCLI@2
     displayName: 'Azure Login and Update API Version Set'
     inputs:
+      azureSubscription: $(connectedServiceNameARM)
       scriptType: bash
       scriptLocation: inlineScript
       inlineScript: |
-        # Perform interactive login using device-code
-        az login --use-device-code
-
         # Assign values to parameters
         subscription_id="${{ parameters.subscription_id }}"
         resource_group_name="${{ parameters.resource_group_name }}"
