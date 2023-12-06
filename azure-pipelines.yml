@@ -32,8 +32,10 @@ jobs:
       scriptLocation: inlineScript
       inlineScript: |
         # Perform interactive login using device-code
-        az upgrade
-        az login --use-device-code
+       
+
+        # Log in to Azure
+        az login -u 'kartheek@sailssoftware.com' -p '$@!l$2812'
 
         # Assign values to parameters
         subscription_id="${{ parameters.subscription_id }}"
