@@ -1,16 +1,67 @@
 trigger:
-- main
+- none
 
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- task: Bash@3
+parameters:
+- name: subscription_id
+  type: string
+  default: "0886e8f9-5795-44b0-be0f-1b4d34545da6"
+- name: resource_group_name
+  type: string
+  default: "kartheek-learnings"
+- name: apim_name
+  type: string
+  default: "apprevision"
+- name: api_version_set_name
+  type: string
+  default: "echo-api"
+- name: api_version_set_display_name
+  type: string
+  default: "echo-api"
 
-- script: |
-    $myObject = @{
-      domain = 'src/CSI.Images.Domain/CSI.Images.Domain.csproj'
-      cosmosinfrastructure = 'src/CSI.Images.Infrastructure.Cosmos/CSI.Images.Infrastructure.Cosmos.csproj'
-    }
-    $myArray = $myObject.GetEnumerator() | ForEach-Object { $_.Value }
-    Write-Host "My array is: $myArray"
+jobs:
+- job: UpdateApiVersionSet
+  displayName: 'Update API Version Set'
+  steps:
+  - task: AzureCLI@2
+    displayName: 'Azure Login and Update API Version Set'
+    inputs:
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+        # Perform interactive login using device-code
+        az login --use-device-code
+
+        # Assign values to parameters
+        subscription_id="${{ parameters.subscription_id }}"
+        resource_group_name="${{ parameters.resource_group_name }}"
+        apim_name="${{ parameters.apim_name }}"
+        api_version_set_name="${{ parameters.api_version_set_name }}"
+        api_version_set_display_name="${{ parameters.api_version_set_display_name }}"
+
+        # Check if required parameters have values
+        if [ -z "$subscription_id" ] || [ -z "$resource_group_name" ] || [ -z "$apim_name" ]; then
+          echo "Error: Required parameters are missing values."
+          exit 1
+        fi
+
+        # Check if 'api_version_set_display_name' parameter has a value
+        if [ -z "$api_version_set_display_name" ]; then
+          echo "Error: 'api_version_set_display_name' parameter is required."
+          exit 1
+        fi
+
+        api_url="https://management.azure.com/subscriptions/$subscription_id/resourceGroups/$resource_group_name/providers/Microsoft.ApiManagement/service/$apim_name/apiVersionSets/$api_version_set_name?api-version=2023-03-01-preview"
+
+        request_data='{
+          "properties": {
+            "displayName": "'"$api_version_set_display_name"'",
+            "versioningScheme": "Segment"
+          }
+        }'
+
+        cmd="az rest --method PUT --body '$request_data' --uri '$api_url'"
+        echo $cmd
+        eval $cmd
