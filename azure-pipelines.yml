@@ -28,7 +28,7 @@ jobs:
   - task: AzureCLI@2
     displayName: 'Azure Login and Update API Version Set'
     inputs:
-      scriptType: bash
+      scriptType: InlineScript
       scriptLocation: inlineScript
       inlineScript: |
         # Perform interactive login using device-code
