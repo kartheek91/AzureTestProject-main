@@ -33,7 +33,7 @@ jobs:
       inlineScript: |
         # Perform interactive login using device-code
        
-
+        az login
 
 
         # Assign values to parameters
