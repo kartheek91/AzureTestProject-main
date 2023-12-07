@@ -34,8 +34,6 @@ jobs:
         # Perform interactive login using device-code
        
 
-        # Log in to Azure
-        az login --use-device-code
 
 
         # Assign values to parameters
